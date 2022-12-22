@@ -6,34 +6,34 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 10:52:36 by hborn             #+#    #+#             */
-/*   Updated: 2022/12/21 11:48:59 by hborn            ###   ########.fr       */
+/*   Updated: 2022/12/22 11:27:18 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-List1 *initialisation()
+List *initialisation()
 {
-    List1 *list1 = malloc(sizeof(*list1));
-    Element1 *element1 = malloc(sizeof(*element1));
+    List *list = malloc(sizeof(*list));
+    Element *element = malloc(sizeof(*element));
 
-    if (list1 == NULL || element1 == NULL)
+    if (list == NULL || element == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
-    element1->number = 0;
-    element1->next = NULL;
-    //element->prev = NULL;
-    list1->first = element1;
+    element->number = 0;
+    element->next = NULL;
+    list->first = element;
 
-    return list1;
+    return list;
 }
 
 int main()
 {
-    List1 *maListe1 = initialisation();
+    List *maListe1 = initialisation();
+    List *maListe2 = initialisation();
 
     insertion(maListe1, 4);
     insertion(maListe1, 8);
@@ -53,6 +53,11 @@ int main()
     reverse_rotate(maListe1);
     
     afficherListe(maListe1);
+
+	push(maListe2, maListe1);
+
+	afficherListe(maListe1);
+	afficherListe(maListe2);
 
     return (0);
 }

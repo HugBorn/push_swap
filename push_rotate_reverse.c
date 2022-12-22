@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_reverse.c                                   :+:      :+:    :+:   */
+/*   push_rotate_reverse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:46:03 by hborn             #+#    #+#             */
-/*   Updated: 2022/12/21 11:48:56 by hborn            ###   ########.fr       */
+/*   Updated: 2022/12/22 11:39:53 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ void reverse_rotate(List *list)
 	
 	i = actual->number;
 	between(list, x, i);
+}
+
+void push(List *list1, List *list2)
+{
+	Element *first2 = list2->first;
+	int x;
+
+	x = 0;
+	if (list2)
+	{
+		x = first2->number;
+		suppression(list2);
+		insertion(list1, x);
+	}
 }
