@@ -6,7 +6,7 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:34:40 by hborn             #+#    #+#             */
-/*   Updated: 2022/12/22 11:40:51 by hborn            ###   ########.fr       */
+/*   Updated: 2022/12/23 10:54:11 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ struct List
 };
 
 List *initialisation();
-int main();
+int main(char ac, char *av[]);
+int int_checker(char *number);
+int	ft_atoi(const char *theString);
+char machina(List *list1, List *list2);
 void insertion(List *list, int newnb);
 void suppression(List *list);
 void afficherListe(List *list);
