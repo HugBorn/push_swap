@@ -6,7 +6,7 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:45:32 by hborn             #+#    #+#             */
-/*   Updated: 2022/12/22 11:38:43 by hborn            ###   ########.fr       */
+/*   Updated: 2022/12/31 16:27:16 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void insertion(List *list, int newnb)
 {
-    /* Création du nouvel élément */
     Element *new = malloc(sizeof(*new));
     if (list == NULL || new == NULL)
     {
@@ -23,8 +22,7 @@ void insertion(List *list, int newnb)
     }
     new->number = newnb;
 
-    /* Insertion de l'élément au début de la liste */
-    new->next = list->first;
+	new->next = list->first;
     list->first = new;
 }
 
@@ -85,8 +83,9 @@ void swap(List *list)
 {
 	Element *actual = list->first;
 	int number;
-	int i = 0;
+	int i;
 
+	i = 0;
 	number = actual->number;
 	while (i != 1)
 	{
@@ -94,8 +93,6 @@ void swap(List *list)
 		actual = actual->next;
 	}
 	i = actual->number;
-	//printf("\n%d", i);
 	between(list, number, i);
 	suppression(list);
-
 }
