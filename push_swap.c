@@ -6,16 +6,17 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:45:32 by hborn             #+#    #+#             */
-/*   Updated: 2022/12/31 16:27:16 by hborn            ###   ########.fr       */
+/*   Updated: 2023/01/03 11:38:48 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-void insertion(List *list, int newnb)
+List *insertion(List *list, int newnb)
 {
     Element *new = malloc(sizeof(*new));
+	
     if (list == NULL || new == NULL)
     {
         exit(EXIT_FAILURE);
@@ -24,6 +25,7 @@ void insertion(List *list, int newnb)
 
 	new->next = list->first;
     list->first = new;
+	return (list);
 }
 
 void suppression(List *list)
