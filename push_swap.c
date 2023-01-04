@@ -6,12 +6,20 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:45:32 by hborn             #+#    #+#             */
-/*   Updated: 2023/01/03 11:38:48 by hborn            ###   ########.fr       */
+/*   Updated: 2023/01/04 18:12:27 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void set_last(List *list)
+{
+	Element *actual = list->first;
+
+	while (actual->next != NULL)
+		actual = actual->next;
+	list->last = actual;
+}
 
 List *insertion(List *list, int newnb)
 {
@@ -38,7 +46,7 @@ void suppression(List *list)
     if (list->first != NULL)
     {
         Element *aSupprimer = list->first;
-        list->first = list->first->next;
+        list->first = aSupprimer->next;
         free(aSupprimer);
     }
 }
@@ -97,4 +105,5 @@ void swap(List *list)
 	i = actual->number;
 	between(list, number, i);
 	suppression(list);
+	set_last(list);
 }

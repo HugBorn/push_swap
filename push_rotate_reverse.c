@@ -6,7 +6,7 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:46:03 by hborn             #+#    #+#             */
-/*   Updated: 2022/12/31 15:33:08 by hborn            ###   ########.fr       */
+/*   Updated: 2023/01/04 18:20:25 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ void reverse_rotate(List *list)
 
 void push(List *list1, List *list2)
 {
-	Element *first2 = list2->first;
+	Element *first1 = list1->first;
 	int x;
 
-	x = 0;
-	x = first2->number;
-	suppression(list2);
-	insertion(list1, x);
+	x = first1->number;
+	suppression(list1);
+	insertion(list2, x);
 }

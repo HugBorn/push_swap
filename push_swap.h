@@ -6,7 +6,7 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:34:40 by hborn             #+#    #+#             */
-/*   Updated: 2023/01/03 11:38:59 by hborn            ###   ########.fr       */
+/*   Updated: 2023/01/04 18:11:26 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void rotate(List *list);
 void reverse_rotate(List *list);
 void push(List *list1, List *list2);
 int list_checker(List *list);
+void set_last(List *list);
+
 
 #endif
