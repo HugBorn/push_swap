@@ -6,7 +6,7 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:46:03 by hborn             #+#    #+#             */
-/*   Updated: 2023/01/04 18:20:25 by hborn            ###   ########.fr       */
+/*   Updated: 2023/01/04 22:32:14 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void rotate(List *list)
     last->next = NULL;
     
     insertion(list, actual->number);
+	set_last(list);
 }
 
 void reverse_rotate(List *list)
@@ -46,6 +47,7 @@ void reverse_rotate(List *list)
 	
 	i = actual->number;
 	between(list, x, i);
+	set_last(list);
 }
 
 void push(List *list1, List *list2)
@@ -56,4 +58,6 @@ void push(List *list1, List *list2)
 	x = first1->number;
 	suppression(list1);
 	insertion(list2, x);
+	set_last(list1);
+	set_last(list2);
 }
