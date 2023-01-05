@@ -6,7 +6,7 @@
 /*   By: hborn <hborn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:45:32 by hborn             #+#    #+#             */
-/*   Updated: 2023/01/04 18:12:27 by hborn            ###   ########.fr       */
+/*   Updated: 2023/01/05 17:39:05 by hborn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ List *insertion(List *list, int newnb)
     new->number = newnb;
 
 	new->next = list->first;
+	new->next->prev = new;
     list->first = new;
 	return (list);
 }
 
-void suppression(List *list)
+List *suppression(List *list)
 {
     if (list == NULL)
     {
@@ -49,9 +50,10 @@ void suppression(List *list)
         list->first = aSupprimer->next;
         free(aSupprimer);
     }
+	return (list);
 }
 
-void afficherListe(List *list)
+List *afficherListe(List *list)
 {
     if (list == NULL)
     {
@@ -66,9 +68,10 @@ void afficherListe(List *list)
         actual = actual->next;
     }
     printf("NULL\n");
+	return (list);
 }
 
-void between(List *list, int newnb, int i)
+List *between(List *list, int newnb, int i)
 {
 	Element *actual = list->first;
 	Element *between = malloc(sizeof(*between));
@@ -87,23 +90,18 @@ void between(List *list, int newnb, int i)
 		}
 		actual = actual->next;
 	}
+	return (list);
 }
 
-void swap(List *list)
+List *swap(List *list)
 {
 	Element *actual = list->first;
-	int number;
-	int i;
+	Element *first  = malloc(sizeof(*first));
 
-	i = 0;
-	number = actual->number;
-	while (i != 1)
-	{
-		i++;
-		actual = actual->next;
-	}
-	i = actual->number;
-	between(list, number, i);
-	suppression(list);
-	set_last(list);
+	first->number = actual->next->number;
+	first->next = actual;
+	actual->next = actual->next->next;
+	list->first = first;
+
+	return (list);
 }
