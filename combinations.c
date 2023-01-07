@@ -26,6 +26,7 @@ List *initialisation(int nb)
 
 	element->number = nb;
 	element->next = NULL;
+    element->prev = NULL;
 	list->first = element;
 	list->last = element;
 
@@ -114,110 +115,62 @@ int machina(List *list1, List *list2)
 	{
 		list1 = swap(list1);
 		list2 = swap(list2);
-
-		write(1, "\nss\n", 4);
+		write(1, "ss\n", 3);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	while (actual1->next != NULL && actual2->next != NULL && actual1->number > last1->number && actual2->number < last2->number)
 	{
 		list1 = rotate(list1);
 		list2 = rotate(list2);
-
-		write(1, "\nrr\n", 4);
+		write(1, "rr\n", 3);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	while (actual1->next != NULL && actual2->next != NULL && actual1->number > last1->number && actual2->number < last2->number)
 	{
 		list1 = reverse_rotate(list1);
 		list2 = reverse_rotate(list2);
-
-		write(1, "\nrrr\n", 5);
+		write(1, "rrr\n", 4);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	// SWAP
 	if (actual1->next != NULL && actual1->number > actual1->next->number)
 	{
-        printf("actual1 : %d\n", actual1->number);
-        printf("\nlast1 : %d\n", last1->number);
 		list1 = swap(list1);
-        printf("actual1 : %d\n", actual1->number);
-        printf("\nlast1 : %d\n", last1->number);
-		write(1, "\nsa\n", 4);
+		write(1, "sa\n", 3);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	if (actual2->next != NULL && actual2->number < actual2->next->number)
 	{
 		list2 = swap(list2);
-		write(1, "\nsb\n", 4);
+		write(1, "sb\n", 3);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	// ROTATE
-	while (actual1->number > last1->number && actual1->next != NULL)
+	while (actual1->next != NULL && actual1->number > last1->number)
 	{
-        printf("actual1 : %d\n", actual1->number);
-        printf("\nlast1 : %d\n", last1->number);
 		list1 = rotate(list1);
-		write(1, "\nra\n", 4);
+		write(1, "ra\n", 3);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
-        printf("actual1 : %d\n", actual1->number);
-        printf("\nlast1 : %d\n", last1->number);
-
 	}
 	while (actual2->next != NULL && actual2->number < last2->number)
 	{
 		list2 = rotate(list2);
-		write(1, "\nrb\n", 4);
+		write(1, "rb\n", 3);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	// REVERSE ROTATE
 	while (actual1->next != NULL && actual1->number > last1->number)
 	{
 		list1 = reverse_rotate(list1);
-		write(1, "\nrra\n", 5);
-		set_last(list1);
+		write(1, "rra\n", 5);
+		// set_last(list1);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	while (actual2->next != NULL && actual2->number < last2->number)
 	{
 		list2 = reverse_rotate(list2);
-		write(1, "\nrrb\n", 5);
+		write(1, "rrb\n", 4);
 		check = 1;
-		printf("%s\n", "list1 :");
-		afficherListe(list1);
-		printf("%s\n", "list2 :");
-		afficherListe(list2);
 	}
 	return(check);
 }
@@ -232,61 +185,47 @@ void pushpushpush(List *list1, List *list2, int nb)
 			between(list2, list1->first->number, 0);
 			suppression(list2);
 			suppression(list1);
-			write(1, "\npa\n", 4);
-			printf("%s\n", "list1 :");
-			afficherListe(list1);
-			printf("%s\n", "list2 :");
-			afficherListe(list2);
+			write(1, "pa\n", 3);
 		}
 		else
 		{
 			push(list1, list2);
-			write(1, "\npa\n", 4);
-			printf("%s\n", "list1 :");
-			afficherListe(list1);
-			printf("%s\n", "list2 :");
-			afficherListe(list2);
+			write(1, "pa\n", 3);
 		}
 	}
 }
 
 List *coordinator(List *list1, List *list2)
 {
+	Element *actual2 = list2->first;
 	int nb = 0;
 
 	while (list_checker(list1) == 0)
 	{
 		
 		machina(list1, list2);
-
-		pushpushpush(list1, list2, nb);
+		if (list_checker(list1) == 0)
+			pushpushpush(list1, list2, nb);
 		nb++;
 
 	}
 
-	while (nb != 0)
+	while (nb != 0 && actual2->next != NULL)
 	{
 
 		if (nb == 2)
 		{
 			insertion(list1, list2->first->number);
-			write(1, "\npb\n", 4);
-			printf("%s\n", "list1 :");
-			afficherListe(list1);
-			printf("%s\n", "list2 :");
-			afficherListe(list2);
+			write(1, "pb\n", 3);
+			machina(list1, list2);
 			break;
 		}
 		else
 		{
 			push(list2, list1);
-			write(1, "\npb\n", 4);
-			printf("%s\n", "list1 :");
-			afficherListe(list1);
-			printf("%s\n", "list2 :");
-			afficherListe(list2);
-			machina(list1, list2);
+			write(1, "pb\n", 3);
 		}
+		machina(list1, list2);
 		
 		nb--;
 	}
@@ -303,7 +242,7 @@ int main(int ac, char* av[])
 		i++;
 	i--;
     List *list1 = initialisation(ft_atoi(av[i--]));
-    // List *list2 = initialisation(0);
+    List *list2 = initialisation(0);
 
 	if (ac > 1)
 	{
@@ -328,62 +267,36 @@ int main(int ac, char* av[])
 		exit(EXIT_FAILURE);
 	}
 
-	Element *actual1 = list1->first;
-	Element *last1 = list1->last;
+	// Element *actual1 = list1->first;
+	// Element *last1 = list1->last;
 
 	printf("%s\n", "list1 :");
 	afficherListe(list1);
-	// printf("%s\n", "list2 :");
-   	// afficherListe(list2);
+    printf("%s\n", "list2 :");
+   	afficherListe(list2);
+ 
 
-	// list1 = coordinator(list1, list2);
+	list1 = coordinator(list1, list2);
 
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-	
-	list1 = swap(list1);
-	printf("%s\n", "list1 :");
-	afficherListe(list1);
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-	
-	list1 = rotate(list1);
-	printf("%s\n", "list1 :");
-	afficherListe(list1);
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-	
-	list1 = reverse_rotate(list1);
-	printf("%s\n", "list1 :");
-	afficherListe(list1);
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-
-	    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-	
-	list1 = swap(list1);
-	printf("%s\n", "list1 :");
-	afficherListe(list1);
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-	
-	list1 = rotate(list1);
-	printf("%s\n", "list1 :");
-	afficherListe(list1);
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
-	
-	list1 = reverse_rotate(list1);
-	printf("%s\n", "list1 :");
-	afficherListe(list1);
-    printf("actual1 : %d\n", actual1->number);
-    printf("last1 : %d\n", last1->number);
 
 	printf("%s\n", "list1 :");
-	afficherListe(list1);
-	// printf("%s\n", "list2 :");
-   	// afficherListe(list2);
+   	afficherListe(list1);	
+    printf("%s\n", "list2 :");
+   	afficherListe(list2);
+
+    printf("\nfirst : %d\n", list1->first->number);
+    printf("\nfirst->next : %d\n", list1->first->next->number);
+    printf("\nlast->prev : %d\n", list1->last->prev->number);
+    printf("\nlast : %d\n", list1->last->number);
 
     return (0);
 }
+
+// TEST POINTEURS
+
+	// printf("%s\n", "list1 :");
+	// afficherListe(list1);
+    // printf("\nfirst : %d\n", list1->first->number);
+    // printf("\nfirst->next : %d\n", list1->first->next->number);
+    // printf("\nlast->prev : %d\n", list1->last->prev->number);
+    // printf("\nlast : %d\n", list1->last->number);

@@ -12,18 +12,38 @@
 
 #include "push_swap.h"
 
+List *swap(List *list)
+{
+	Element *first = list->first;
+	Element *second = first->next;
+	Element *temp  = malloc(sizeof(*temp));
+
+	temp->number = first->number;
+	first->number = second->number;
+	second->number = temp->number;
+
+	free(temp);
+
+	return(list);
+}
+
+
 List *rotate(List *list)
 {
-	Element *actual = list->first;
+	Element *first = list->first;
 	Element *last = list->last;
 	Element *newfirst  = malloc(sizeof(*newfirst));
 
 	newfirst->number = last->number;
-	newfirst->next = actual;
 	last->prev->next = NULL;
+
+	newfirst->next = first;
+	first->prev = newfirst;
+	newfirst->prev = NULL;
+
 	list->first = newfirst;
-	set_last(list);
-	// list->last = last->prev;
+	list->last = last->prev;
+
 	free(last);
 
 	return(list);
@@ -37,10 +57,14 @@ List *reverse_rotate(List *list)
 	Element *newlast  = malloc(sizeof(*newlast));
 
 	newlast->number = first->number;
+	newlast->prev = last;
 	newlast->next = NULL;
 	last->next = newlast;
-	list->first = first->next;
+
 	list->last = newlast;
+	list->first = first->next;
+	first->next->prev = NULL;
+
 	free(first);
 
 	return (list);
@@ -52,8 +76,12 @@ void push(List *list1, List *list2)
 	int x;
 
 	x = first1->number;
-	suppression(list1);
 	insertion(list2, x);
-	set_last(list1);
-	set_last(list2);
+
+	if (first1->next != NULL)
+	{
+		first1->next->prev = NULL;
+		list1->first = first1->next;
+		free(first1);
+	}
 }

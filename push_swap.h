@@ -39,14 +39,14 @@ int	ft_atoi(const char *theString);
 int machina(List *list1, List *list2);
 List *insertion(List *list, int newnb);
 List *suppression(List *list);
-List *afficherListe(List *list);
+void afficherListe(List *list);
 List *between(List *list, int newnb, int i);
 List *swap(List *list);
 List *rotate(List *list);
 List *reverse_rotate(List *list);
 void push(List *list1, List *list2);
 int list_checker(List *list);
-void set_last(List *list);
+// void set_last(List *list);
 void pushpushpush(List *list1, List *list2, int nb);
 List *coordinator(List *list1, List *list2);
 

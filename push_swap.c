@@ -12,16 +12,16 @@
 
 #include "push_swap.h"
 
-void set_last(List *list)
-{
-	Element *actual = list->first;
+// void set_last(List *list)
+// {
+// 	Element *actual = list->first;
 
-	while (actual->next != NULL)
-		actual = actual->next;
-	list->last = actual;
-}
+// 	while (actual->next != NULL)
+// 		actual = actual->next;
+// 	list->last = actual;
+// }
 
-List *insertion(List *list, int newnb)
+List *insertion(List *list, int newnumber)
 {
     Element *new = malloc(sizeof(*new));
 	
@@ -29,10 +29,11 @@ List *insertion(List *list, int newnb)
     {
         exit(EXIT_FAILURE);
     }
-    new->number = newnb;
+    new->number = newnumber;
 
 	new->next = list->first;
 	new->next->prev = new;
+	new->prev = NULL;
     list->first = new;
 	return (list);
 }
@@ -53,7 +54,7 @@ List *suppression(List *list)
 	return (list);
 }
 
-List *afficherListe(List *list)
+void afficherListe(List *list)
 {
     if (list == NULL)
     {
@@ -68,7 +69,6 @@ List *afficherListe(List *list)
         actual = actual->next;
     }
     printf("NULL\n");
-	return (list);
 }
 
 List *between(List *list, int newnb, int i)
@@ -93,15 +93,3 @@ List *between(List *list, int newnb, int i)
 	return (list);
 }
 
-List *swap(List *list)
-{
-	Element *actual = list->first;
-	Element *first  = malloc(sizeof(*first));
-
-	first->number = actual->next->number;
-	first->next = actual;
-	actual->next = actual->next->next;
-	list->first = first;
-
-	return (list);
-}
